@@ -117,20 +117,12 @@ class Users{
 		return ($_SESSION['roles'] & ADMIN);
 	}
 
-	public function is_farmer(){
-		return ($_SESSION['roles'] & FARMER);
+	public function is_updater(){
+		return ($_SESSION['roles'] & UPDATER);
 	}
 
-	public function is_factory(){
-		return ($_SESSION['roles'] & FACTORY);
-	}
-
-	public function is_packer(){
-		return ($_SESSION['roles'] & PACKER);
-	}
-
-	public function is_retail(){
-		return ($_SESSION['roles'] & RETAIL);	
+	public function is_manager(){
+		return ($_SESSION['roles'] & MANAGER);
 	}
 
 	public function authenticate($username, $password){

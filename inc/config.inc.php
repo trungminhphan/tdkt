@@ -1,10 +1,8 @@
 <?php
 	//DEFINE QUYEN CHO TUNG NGUOI
 	define("ADMIN", 1);
-	define("FACTORY", 2);
-	define("RETAIL", 4);
-	define("FARMER", 8);
-	define("PACKER", 16);
+	define("MANAGER", 2);
+	define("UPDATER", 4);
 
 	$target_files = 'uploads/files/';
 	$target_files_regis = 'uploads_regis/';
@@ -17,6 +15,4 @@
 	
 	$arr_gioitinh = array('M' => 'Nam', 'F' => 'Nữ');
 	$arr_dungdenngay = array('D' => 'Ngày', 'M' => 'Tháng', 'Y' => 'Năm');
-
-	$link_frontend = 'http://103.7.41.160/anovafarm/traceweb';
 ?>

@@ -7,7 +7,7 @@ $users = new Users();
 require_once('inc/functions.inc.php');
 require_once('inc/config.inc.php');
 if(!$users->isLoggedIn()){ transfers_to('./login.html?url=' . $_SERVER['REQUEST_URI']); }
-$user_default = $users->get_one_default();
+//$user_default = $users->get_one_default();
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -107,8 +107,8 @@ $user_default = $users->get_one_default();
                         <li class="divider"></li>
                         <li><a href="danhhieu.html">Danh hiệu</a></li>
                         <li class="divider"></li>
-                        <li><a href="danhhieukhenthuong.html">Danh hiệu khen thưởng</a></li>
-                        <li class="divider"></li>
+                        <!--<li><a href="danhhieukhenthuong.html">Danh hiệu khen thưởng</a></li>
+                        <li class="divider"></li>-->
                         <li><a href="nhansu.html">Nhân sự</a></li>
                         <li class="divider"></li>
                     </ul>
