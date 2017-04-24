@@ -11,7 +11,6 @@ class DonVi {
     public $dienthoai = '';
     public $thongtinkhac = '';
 
-
     public function __construct(){
         $this->_mongo = DBConnect::init();
         $this->_collection = $this->_mongo->getCollection(DonVi::COLLECTION);
@@ -55,6 +54,14 @@ class DonVi {
     public function delete(){
         $query = array('_id' => new MongoId($this->id));
         return $this->_collection->remove($query);
+    }
+
+    public function check_dmdonvi($id_parent){
+        $query = array('id_parent' => $id_parent ? new MongoId($id_parent) : '');
+        $field = array('_id' => true);
+        $result = $this->_collection->findOne($query, $field);
+        if(isset($result['_id']) && $result['_id']) return true;
+        else return false;
     }
 
 }

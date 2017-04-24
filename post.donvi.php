@@ -25,14 +25,18 @@ if($act == 'edit'){
 	}
 } else if($act == 'del'){
 	$donvi->id = $id;
-	if($donvi->delete()){
-		if($url) transfers_to($url . '?msg=Xoá thành công.');
-		else transfers_to('donvi.htmlmsg=Xoá thành công!');
+	if($donvi->check_dmdonvi($id)){
+		transfers_to('donvi.html?msg=Không thể xoá, ràng buộc dữ liệu.');
+	} else {
+		if($donvi->delete()){
+			if($url) transfers_to($url . '?msg=Xoá thành công.');
+			else transfers_to('donvi.html?msg=Xoá thành công!');
+		}
 	}
 } else {
 	if($donvi->insert()){
 		if($url) transfers_to($url . '?msg=Thêm thành công.');
-		else transfers_to('donvi.htmlmsg=Thêm mới thành công!');
+		else transfers_to('donvi.html?msg=Thêm mới thành công!');
 	}
 }
 ?>

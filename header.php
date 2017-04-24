@@ -99,7 +99,7 @@ if(!$users->isLoggedIn()){ transfers_to('./login.html?url=' . $_SERVER['REQUEST_
 	                    <i class="fa fa-list"></i>
 	                    <span>DANH MỤC</span>
 	                </a>
-	                 <ul class="sub-menu">
+	                <ul class="sub-menu">
 	                 	<li class="divider"></li>
                         <li><a href="chucvu.html">Chức vụ</a></li>
                         <li class="divider"></li>
@@ -114,26 +114,47 @@ if(!$users->isLoggedIn()){ transfers_to('./login.html?url=' . $_SERVER['REQUEST_
                     </ul>
                 </li>
             	<?php endif; ?>
-                <li>
+                <li class="has-sub">
                     <a href="#">
+                    	<b class="caret pull-right"></b>
                         <i class="fa fa-sun-o"></i>
                         <span>SÁNG KIẾN KINH NGHIỆM</span>
                     </a>
+                    <ul class="sub-menu">
+                    	<li class="divider"></li>
+                        <li><a href="dankyskkn.html">Đăng ký</a></li>
+                        <li class="divider"></li>
+                        <li><a href="xetduyetskkn.html">Xét duyệt</a></li>
+                    </ul>
                 </li>
-                <li>
+                <li class="has-sub">
                     <a href="#">
+                    	<b class="caret pull-right"></b>
                         <i class="fa fa-gears"></i> 
                         <span>THI ĐUA</span>
                     </a>
+                    <ul class="sub-menu">
+                    	<li class="divider"></li>
+                        <li><a href="dangkythidua.html">Đăng ký</a></li>
+                        <li class="divider"></li>
+                        <li><a href="xetduyetthidua.html">Xét duyệt</a></li>
+                    </ul>
                 </li>
-                <li>
+                <li class="has-sub">
                     <a href="#">
+                    	<b class="caret pull-right"></b>
                         <i class="fa fa-bar-chart-o"></i> 
                         <span>THỐNG KÊ BÁO CÁO</span>
                     </a>
+                    <ul class="sub-menu">
+                    	<li class="divider"></li>
+                        <li><a href="thongkeskkn.html">Sáng kiến kinh nghiệm</a></li>
+                        <li class="divider"></li>
+                        <li><a href="thongkethidua.html">Thi đua</a></li>
+                    </ul>
                 </li>
                <li>
-                    <a href="#">
+                    <a href="timkiem.html">
                         <i class="fa fa-search"></i> 
                         <span>TÌM KIẾM</span>
                     </a>
