@@ -22,6 +22,18 @@ if($act == 'edit'){
 		'nguyenquan' => $ns['nguyenquan'],
 		'cmnd' => $ns['cmnd'],
 		'sodienthoai' => $ns['sodienthoai'],
+		'id_donvi' => strval($ns['donvi'][0]['id_donvi']),
+		'id_chucvu' => strval($ns['donvi'][0]['id_chucvu']),
+		'ngayquyetdinh' => $ns['donvi'][0]['ngayquyetdinh'] ? date("d/m/Y", $ns['donvi'][0]['ngayquyetdinh']->sec) : ''
+ 	);
+	echo json_encode($arr);
+}
+
+if($act == 'chuyencoquan'){
+	$nhansu->id = $id; $ns = $nhansu->get_one();
+	$arr = array(
+		'id' => $id,
+		'act' => $act,
  	);
 	echo json_encode($arr);
 }

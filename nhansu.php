@@ -48,7 +48,7 @@ $donvi_list = $donvi->get_all_list(); $chucvu_list = $chucvu->get_all_list();
                             echo '<td>'.$ns['hoten'].'</td>';
                             echo '<td>'.($ns['ngaysinh'] ? date("d/m/Y", $ns['ngaysinh']->sec) : '').'</td>';
                             echo '<td>'.$arr_gioitinh[$ns['gioitinh']].'</td>';
-                            echo '<td class="text-center" style="width:50px;"><a href="get.nhansu.html?id='.$ns['_id'].'&act=chuyencoquan#modal-chuyencoquan" data-toggle="modal" class="suanhansu"><i class="fa fa-refresh"></i></a></td>';
+                            echo '<td class="text-center" style="width:50px;"><a href="get.nhansu.html?id='.$ns['_id'].'&act=chuyencoquan#modal-chuyencoquan" data-toggle="modal" class="chuyencoquan"><i class="fa fa-refresh"></i></a></td>';
                             echo '<td class="text-center"><a href="get.nhansu.html?id='.$ns['_id'].'&act=del" onclick="return confirm(\'Chắc chắn muốn xoá?\');"><i class="fa fa-trash"></i></a></td>';
                             echo '<td class="text-center"><a href="get.nhansu.html?id='.$ns['_id'].'&act=edit#modal-nhansu" data-toggle="modal" class="suanhansu"><i class="fa fa-pencil"></i></a></td>';
                             echo '</tr>';$i++;
@@ -61,7 +61,6 @@ $donvi_list = $donvi->get_all_list(); $chucvu_list = $chucvu->get_all_list();
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="modal-chuyencoquan">
 <form action="post.nhansu.html" method="POST" class="form-horizontal" data-parsley-validate="true" name="congtyform">
     <input type="hidden" name="id" id="id_chuyencoquan" />
@@ -74,10 +73,10 @@ $donvi_list = $donvi->get_all_list(); $chucvu_list = $chucvu->get_all_list();
                 <h4 class="modal-title">Thông tin cơ quan chuyển</h4>
             </div>
             <div class="modal-body">
-                <div class="form-group donvi">
+                <div class="form-group">
                     <label class="col-md-3 control-label">Đơn vị công tác</label>
                     <div class="col-md-9">
-                    <select name="id_chucvu" id="id_chucvu" class="select2" style="width:100%">
+                    <select name="id_donvi" id="id_chucvu_chuyencoquan" class="select2" style="width:100%">
                         <option value="">Chọn đơn vị</option>
                         <?php
                         if($donvi_list){
@@ -88,10 +87,10 @@ $donvi_list = $donvi->get_all_list(); $chucvu_list = $chucvu->get_all_list();
                     </select>                       
                     </div>
                 </div>
-                <div class="form-group donvi">
+                <div class="form-group">
                     <label class="col-md-3 control-label">Chức vụ</label>
                     <div class="col-md-3">
-                        <select name="id_chucvu" id="id_chucvu" class="select2" style="width:100%">
+                        <select name="id_chucvu" id="id_chucvu_chuyencoquan" class="select2" style="width:100%">
                             <option value="">Chức vụ</option>
                             <?php
                             if($chucvu_list){
@@ -104,7 +103,7 @@ $donvi_list = $donvi->get_all_list(); $chucvu_list = $chucvu->get_all_list();
                     </div>
                     <label class="col-md-3 control-label">Ngày quyết định</label>
                     <div class="col-md-3">
-                        <input type="text" name="ngayquyetdinh" id="ngayquyetdinh" value="<?php echo date("d/m/Y"); ?>" class="form-control ngaythangnam" data-date-format="dd/mm/yyyy" data-inputmask="'alias': 'date'" data-parsley-required="true" />
+                        <input type="text" name="ngayquyetdinh" id="ngayquyetdinh_chuyencoquan" value="<?php echo date("d/m/Y"); ?>" class="form-control ngaythangnam" data-date-format="dd/mm/yyyy" data-inputmask="'alias': 'date'" data-parsley-required="true" />
                     </div>
                 </div>
             </div>
@@ -174,7 +173,7 @@ $donvi_list = $donvi->get_all_list(); $chucvu_list = $chucvu->get_all_list();
                 <div class="form-group donvi">
                     <label class="col-md-3 control-label">Đơn vị công tác</label>
                     <div class="col-md-9">
-                    <select name="id_chucvu" id="id_chucvu" class="select2" style="width:100%">
+                    <select name="id_donvi" id="id_donvi" class="select2" style="width:100%">
                         <option value="">Chọn đơn vị</option>
                         <?php
                         if($donvi_list){
@@ -248,7 +247,7 @@ $donvi_list = $donvi->get_all_list(); $chucvu_list = $chucvu->get_all_list();
         $(".ngaythangnam").datepicker({todayHighlight:!0});
         $(".ngaythangnam").inputmask();
         $(".suanhansu").click(function(){
-            $(".donvi").hide();
+            //$(".donvi").hide();
             var _link = $(this).attr("href");
             $.getJSON(_link, function(data){
                 $("#id").val(data.id); $("#act").val(data.act);
@@ -259,6 +258,15 @@ $donvi_list = $donvi->get_all_list(); $chucvu_list = $chucvu->get_all_list();
                 $("#nguyenquan").val(data.nguyenquan);
                 $("#cmnd").val(data.cmnd);
                 $("#sodienthoai").val(data.sodienthoai);
+                $("#id_donvi").val(data.id_donvi); $("#id_donvi").select2();
+                $("#id_chucvu").val(data.id_chucvu); $("#id_chucvu").select2();
+                $("#ngayquyetdinh").val(data.ngayquyetdinh);
+            });
+        });
+        $(".chuyencoquan").click(function(){
+            var _link = $(this).attr("href");
+            $.getJSON(_link, function(data){
+                $("#id_chuyencoquan").val(data.id); $("#act_chuyencoquan").val(data.act);
             });
         });
         App.init();TableManageDefault.init();

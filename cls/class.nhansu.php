@@ -12,7 +12,10 @@ class NhanSu {
     public $nguyenquan = '';
     public $cmnd = '';
     public $sodienthoai = '';
-    public $donvi = array(); //array('_id', 'id_donvi', 'id_chucvu', ngayquyetdinh)
+    public $donvi = array(); //array('_id', 'id_donvi', 'id_chucvu', ngayquyetdinh, date_post)
+    public $id_donvi = '';
+    public $id_chucvu = '';
+    public $ngayquyetdinh = '';
     public $date_post = array();
 
     public function __construct(){
@@ -42,7 +45,7 @@ class NhanSu {
             'nguyenquan' => $this->nguyenquan,
             'cmnd' => $this->cmnd,
             'sodienthoai' => $this->sodienthoai,
-            'donvi' => $this->donvi,
+            'donvi' => array($this->donvi),
             'date_post' => new MongoDate()
         );
         return $this->_collection->insert($query);
@@ -56,7 +59,18 @@ class NhanSu {
             'gioitinh' => $this->gioitinh,
             'nguyenquan' => $this->nguyenquan,
             'cmnd' => $this->cmnd,
-            'sodienthoai' => $this->sodienthoai));
+            'sodienthoai' => $this->sodienthoai,
+            'donvi.0.id_donvi' => $this->id_donvi ? new MongoId($this->id_donvi) : '',
+            'donvi.0.id_chucvu' => $this->id_chucvu ? new MongoId($this->id_chucvu) : '',
+            'donvi.0.ngayquyetdinh' => $this->ngayquyetdinh
+        ));
+        $condition = array('_id' => new MongoId($this->id));
+        return $this->_collection->update($condition, $query);
+    }
+
+    public function push_donvi(){
+        $query = array('$push' => array('donvi' => array('$each' => array($this->donvi), '$position' => 0)));
+        //$query = array('$push' => array('donvi' => $this->donvi));
         $condition = array('_id' => new MongoId($this->id));
         return $this->_collection->update($condition, $query);
     }

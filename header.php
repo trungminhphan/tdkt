@@ -100,6 +100,8 @@ if(!$users->isLoggedIn()){ transfers_to('./login.html?url=' . $_SERVER['REQUEST_
 	                    <span>DANH MỤC</span>
 	                </a>
 	                <ul class="sub-menu">
+                        <li class="divider"></li>
+                        <li><a href="nam.html">Năm xét thi đua</a></li>
 	                 	<li class="divider"></li>
                         <li><a href="chucvu.html">Chức vụ</a></li>
                         <li class="divider"></li>
@@ -107,8 +109,8 @@ if(!$users->isLoggedIn()){ transfers_to('./login.html?url=' . $_SERVER['REQUEST_
                         <li class="divider"></li>
                         <li><a href="danhhieu.html">Danh hiệu</a></li>
                         <li class="divider"></li>
-                        <!--<li><a href="danhhieukhenthuong.html">Danh hiệu khen thưởng</a></li>
-                        <li class="divider"></li>-->
+                        <li><a href="danhhieukhenthuong.html">Danh hiệu khen thưởng</a></li>
+                        <li class="divider"></li>
                         <li><a href="nhansu.html">Nhân sự</a></li>
                         <li class="divider"></li>
                     </ul>

@@ -18,7 +18,8 @@ $arr_donvi = array(
 	'_id' => new MongoId(),
 	'id_donvi' => $id_donvi ? new MongoId($id_donvi) : '',
 	'id_chucvu' => $id_chucvu ? new MongoId($id_chucvu) : '',
-	'ngayquyetdinh' => $ngayquyetdinh ? new MongoDate(convert_date_yyyy_mm_dd($ngayquyetdinh)) : ''
+	'ngayquyetdinh' => $ngayquyetdinh ? new MongoDate(convert_date_yyyy_mm_dd($ngayquyetdinh)) : '',
+	'date_post' => new Mongodate()
 );
 $l = explode("?", $url); $url = $l[0];
 if($act == 'edit'){
@@ -30,14 +31,24 @@ if($act == 'edit'){
 	$nhansu->nguyenquan = $nguyenquan;
 	$nhansu->cmnd = $cmnd;
 	$nhansu->sodienthoai = $sodienthoai;
+	$nhansu->id_donvi = $id_donvi;
+	$nhansu->id_chucvu = $id_chucvu;
+	$nhansu->ngayquyetdinh = $ngayquyetdinh ? new MongoDate(convert_date_yyyy_mm_dd($ngayquyetdinh)) : '';
 	if($nhansu->edit()){
-		if($url) transfers_to($url.'?msg=Thêm thành công.');
-		else transfers_to('donvi.html?msg=Thêm mới thành công!');
+		if($url) transfers_to($url.'?msg=Chỉnh sửa thành công.');
+		else transfers_to('nhansu.html?msg=Chỉnh sửa thành công!');
 	}
-} else if($act == 'del'){
-
-} else if($act == 'push'){
-
+}  else if($act == 'chuyencoquan'){
+	$nhansu->id = $id;
+	$nhansu->donvi = $arr_donvi;
+	if($id_donvi && $id_chucvu){
+		if($nhansu->push_donvi()){
+			if($url) transfers_to($url.'?msg=Chuyển thành công.');
+			else transfers_to('nhansu.html?msg=Chuyển thành công!');
+		}
+	} else {
+		transfers_to('nhansu.html?msg=Chuyển không thành công!');		
+	}
 } else {
 	//insert
 	$nhansu->hoten = $hoten;
@@ -50,7 +61,7 @@ if($act == 'edit'){
 	$nhansu->donvi = $arr_donvi;
 	if($nhansu->insert()){
 		if($url) transfers_to($url . '?msg=Thêm thành công.');
-		else transfers_to('donvi.html?msg=Thêm mới thành công!');
+		else transfers_to('nhansu.html?msg=Thêm mới thành công!');
 	}
 }
 ?>
