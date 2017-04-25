@@ -116,18 +116,11 @@ if(!$users->isLoggedIn()){ transfers_to('./login.html?url=' . $_SERVER['REQUEST_
                     </ul>
                 </li>
             	<?php endif; ?>
-                <li class="has-sub">
-                    <a href="#">
-                    	<b class="caret pull-right"></b>
+                <li>
+                    <a href="sangkienkinhnghiem.html">
                         <i class="fa fa-sun-o"></i>
                         <span>SÁNG KIẾN KINH NGHIỆM</span>
                     </a>
-                    <ul class="sub-menu">
-                    	<li class="divider"></li>
-                        <li><a href="dankyskkn.html">Đăng ký</a></li>
-                        <li class="divider"></li>
-                        <li><a href="xetduyetskkn.html">Xét duyệt</a></li>
-                    </ul>
                 </li>
                 <li class="has-sub">
                     <a href="#">
