@@ -15,4 +15,9 @@
 	
 	$arr_gioitinh = array('M' => 'Nam', 'F' => 'Nữ');
 	$arr_dungdenngay = array('D' => 'Ngày', 'M' => 'Tháng', 'Y' => 'Năm');
+	$arr_tinhtrang = array(
+		0 => 'Đang chờ duyệt',
+		1 => 'Đã duyệt',
+		2 => 'Không duyệt'
+	);
 ?>

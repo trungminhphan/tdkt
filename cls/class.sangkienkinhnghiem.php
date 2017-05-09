@@ -5,10 +5,11 @@ class SangKienKinhNghiem {
     private $_collection;
 
     public $id = '';
+    public $id_nam = 0;
     public $ten = '';
     public $nhansu = array(); //id_nhansu, id_donvi
-    public $xetduyet = 0; //0, 1 - Ok, 2 - no
-    public $lydokhongxet = '';
+    public $xetduyet = 0; //0 - dang chờ xử lý, 1 - Ok, 2 - no
+    public $noidung = '';
     public $date_post = '';
     public $id_user_regis = '';
     public $id_user_check = '';
@@ -33,10 +34,11 @@ class SangKienKinhNghiem {
 
     public function insert(){
         $query = array(
+            'id_nam' => new MongoId($this->id_nam),
             'ten' => $this->ten,
             'nhansu' => $this->nhansu,
             'xetduyet' => 0,
-            'lydokhongxet' => '',
+            'noidung' => '',
             'date_post' => new MongoDate(),
             'id_user_regis' => new MongoId($this->id_user_regis)
         );
@@ -45,8 +47,8 @@ class SangKienKinhNghiem {
 
     public function check(){
         $query = array('$set' => array(
-            'xetduyet' => $this->xetduyet,
-            'lydokhongxet' => $this->lydokhongxet,
+            'xetduyet' => intval($this->xetduyet),
+            'noidung' => $this->noidung,
             'id_user_check' => new MongoId($this->id_user_check),
             'date_check' => new MongoDate()
         ));
@@ -56,12 +58,9 @@ class SangKienKinhNghiem {
 
     public function edit(){
         $query = array('$set' => array(
+            'id_nam' => new MongoId($this->id_nam),
             'ten' => $this->ten,
             'nhansu' => $this->nhansu,
-            'xetduyet' => 0,
-            'lydokhongxet' => '',
-            'date_post' => new MongoDate(),
-            'id_user_regis' => new MongoId($this->id_user_regis)
         ));
         $condition = array('_id' => new MongoId($this->id));
         return $this->_collection->update($condition, $query);

@@ -122,18 +122,11 @@ if(!$users->isLoggedIn()){ transfers_to('./login.html?url=' . $_SERVER['REQUEST_
                         <span>SÁNG KIẾN KINH NGHIỆM</span>
                     </a>
                 </li>
-                <li class="has-sub">
-                    <a href="#">
-                    	<b class="caret pull-right"></b>
+                <li>
+                    <a href="thidua.html">
                         <i class="fa fa-gears"></i> 
                         <span>THI ĐUA</span>
                     </a>
-                    <ul class="sub-menu">
-                    	<li class="divider"></li>
-                        <li><a href="dangkythidua.html">Đăng ký</a></li>
-                        <li class="divider"></li>
-                        <li><a href="xetduyetthidua.html">Xét duyệt</a></li>
-                    </ul>
                 </li>
                 <li class="has-sub">
                     <a href="#">
