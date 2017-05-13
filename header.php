@@ -122,11 +122,38 @@ if(!$users->isLoggedIn()){ transfers_to('./login.html?url=' . $_SERVER['REQUEST_
                         <span>SÁNG KIẾN KINH NGHIỆM</span>
                     </a>
                 </li>
-                <li>
-                    <a href="thidua.html">
+                <li class="has-sub">
+                    <a href="#">
                         <i class="fa fa-gears"></i> 
                         <span>THI ĐUA</span>
                     </a>
+                    <ul class="sub-menu">
+                    	<li class="divider"></li>
+                        <li><a href="thidua.html">Cá nhân</a></li>
+                        <li class="divider"></li>
+                        <li><a href="thiduatapthe.html">Tập thể</a></li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="#">
+                    	<b class="caret pull-right"></b>
+                        <i class="fa fa-check-square"></i> 
+                        <span>XÉT DUYỆT THI ĐUA</span>
+                    </a>
+                    <ul class="sub-menu">
+                    	<li class="divider"></li>
+                        <li><a href="thidua_1.html">Cá nhân vòng 1</a></li>
+                        <li class="divider"></li>
+                        <li><a href="thidua_2.html">Cá nhân vòng 2</a></li>
+                        <li class="divider"></li>
+                        <li><a href="thidua_3.html">Cá nhân vòng 3</a></li>
+                        <li class="divider"></li>
+                        <li><a href="thiduatapthe_1.html">Tập thể vòng 1</a></li>
+                        <li class="divider"></li>
+                        <li><a href="thiduatapthe_2.html">Tập thể vòng 2</a></li>
+                        <li class="divider"></li>
+                        <li><a href="thiduatapthe_3.html">Tập thể vòng 3</a></li>
+                    </ul>
                 </li>
                 <li class="has-sub">
                     <a href="#">

@@ -2,10 +2,13 @@
 require_once('header.php');
 check_permis($users->is_admin());
 $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
-$sangkienkinhnghiem = new SangKienKinhNghiem();$nhansu = new NhanSu();$nam = new Nam();
+$sangkienkinhnghiem = new SangKienKinhNghiem();$nhansu = new NhanSu();$nam = new Nam();$danhhieu = new DanhHieu();
+$thidua = new ThiDua();
 $sangkienkinhnghiem_list = $sangkienkinhnghiem->get_all_list();
 $nhansu_list = $nhansu->get_all_list();
 $nam_list = $nam->get_all_list();
+$danhhieu_list = $danhhieu->get_all_list();
+$thidua_list = $thidua->get_all_list();
 ?>
 <link href="assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
 <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
@@ -22,12 +25,108 @@ $nam_list = $nam->get_all_list();
                 <h4 class="panel-title"><i class="fa fa-list"></i> Thi đua</h4>
             </div>
             <div class="panel-body">
-            	<a href="#modal-thidua" data-toggle="modal" class="btn btn-primary m-10 themthidua"><i class="fa fa-plus"></i> Thêm mới</a>
+            	<a href="#modal-thidua" data-toggle="modal" class="btn btn-primary m-10 themthidua"><i class="fa fa-plus"></i> Đăng ký thi đua mới</a>
+                <table id="data-table" class="table table-striped table-bordered table-hovered">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Năm</th>
+                            <th>Họ tên</th>
+                            <th class="text-center">Danh hiệu đăng ký</th>
+                            <th class="text-center"><i class="fa fa-trash"></i></th>
+                            <th class="text-center"><i class="fa fa-pencil"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    if($thidua_list){
+                        $i = 1;
+                        foreach($thidua_list as $td){
+                            $nhansu->id = $td['nhansu']['id_nhansu']; $ns = $nhansu->get_one();
+                            $nam->id = $td['id_nam']; $n = $nam->get_one();
+                            $danhhieu->id = $td['id_danhhieu']; $dh = $danhhieu->get_one();
+                            echo '<tr>';
+                            echo '<td>'.$i.'</td>';
+                            echo '<td>'.$n['ten'].'</td>';
+                            echo '<td>'.$ns['hoten'].'</td>';
+                            echo '<td>'.$dh['ten'].'</td>';
+                            echo '<td class="text-center"><a href="get.thidua.html?id='.$td['_id'].'&act=del" onclick="return confirm(\'Chắc chắn muốn xoá?\');"><i class="fa fa-trash"></i></a></td>';
+                            echo '<td class="text-center"><a href="get.thidua.html?id='.$td['_id'].'&act=edit#modal-thidua" data-toggle="modal" class="suathidua"><i class="fa fa-pencil"></i></a></td>';
+                            echo '</tr>';
+                        }
+                    }
+                    ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="modal-thidua">
+<form action="post.thidua.html" method="POST" class="form-horizontal" data-parsley-validate="true" name="congtyform">
+    <input type="hidden" name="id" id="id" />
+    <input type="hidden" name="act" id="act" />
+    <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Thông tin đăng ký thi đua cá nhân</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label text-right">Năm</label>
+                    <div class="col-md-3">
+                        <select name="id_nam" id="id_nam" class="select2" style="width:100%">
+                        <?php
+                        if($nam_list){
+                            foreach($nam_list as $n){
+                                echo '<option value="'.$n['_id'].'">'.$n['ten'].'</option>';
+                            }
+                        }
+                        ?>
+                        </select>
+                    </div>
+                    <label class="col-md-3 control-label text-right">Danh hiệu</label>
+                    <div class="col-md-3">
+                        <select name="id_danhhieu" id="id_danhhieu" class="select2" style="width:100%">
+                        <?php
+                        if($danhhieu_list){
+                            foreach($danhhieu_list as $dh){
+                                echo '<option value="'.$dh['_id'].'">'.$dh['ten'].'</option>';
+                            }
+                        }
+                        ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-12 control-label text-left">Cá nhân đăng ký</label>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <select name="id_nhansu[]" id="id_nhansu" multiple="multiple" class="select2" style="width:100%">
+                        <?php
+                        if($nhansu_list){
+                            foreach($nhansu_list as $ns){
+                                $v = $ns['_id'] . '/' . $ns['donvi'][0]['_id'];
+                                echo '<option value="'.$v.'">'.$ns['hoten'].'</option>';
+                            }
+                        }
+                        ?>
+                        </select>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-sm btn-white" data-dismiss="modal">Đóng</a>
+                <button type="submit" name="submit" id="submit" class="btn btn-sm btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
 <div style="clear:both;"></div>
 <?php require_once('footer.php'); ?>
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
@@ -41,6 +140,9 @@ $nam_list = $nam->get_all_list();
 <script src="assets/js/apps.min.js"></script>
 <script>
     $(document).ready(function() {
+        $(".themthidua").click(function(){
+            $("#act").val("register");$("#id").val("");
+        });
         <?php if(isset($msg) && $msg): ?>
         $.gritter.add({
             title:"Thông báo !",
