@@ -143,6 +143,16 @@ $thidua_list = $thidua->get_all_list();
         $(".themthidua").click(function(){
             $("#act").val("register");$("#id").val("");
         });
+        $(".suathidua").click(function(){
+            var _link = $(this).attr("href");
+            $("#id_nhansu").select2("enable",false);
+            $.getJSON(_link, function(data){
+                $("#id").val(data.id); $("#act").val(data.act);
+                $("#id_nam").val(data.id_nam);$("#id_nam").select2();
+                $("#id_danhhieu").val(data.id_danhhieu);$("#id_danhhieu").select2();
+                $("#id_nhansu").val(data.id_nhansu);$("#id_nhansu").select2();
+            });
+        });
         <?php if(isset($msg) && $msg): ?>
         $.gritter.add({
             title:"Thông báo !",

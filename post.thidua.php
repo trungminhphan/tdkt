@@ -19,10 +19,19 @@ if($act == 'register'){
 		}
 	}
 	if($url) transfers_to($url . '?msg=Cập nhật thành công.');
-	else transfers_to('sangkienkinhnghiem.htmlmsg=Cập nhật thành công!');
+	else transfers_to('thidua.htmlmsg=Cập nhật thành công!');
 }
 
 if($act == 'edit'){
-
+	$thidua->id = $id;
+	if($id_nhansu){
+		$a = explode("/", $id_nhansu[0]);
+		$arr_nhansu = array('id_nhansu' => new MongoId($a[0]), 'id_donvi' => new MongoId($a[1]));
+		$thidua->nhansu = $arr_nhansu;
+		if($thidua->edit()){
+			if($url) transfers_to($url . '?msg=Cập nhật thành công.');
+			else transfers_to('sangkienkinhnghiem.htmlmsg=Cập nhật thành công!');
+		}
+	}
 }
 ?>
