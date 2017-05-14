@@ -52,7 +52,7 @@ $thidua_list = $thidua->get_all_list();
                             echo '<td>'.$dh['ten'].'</td>';
                             echo '<td class="text-center"><a href="get.thidua.html?id='.$td['_id'].'&act=del" onclick="return confirm(\'Chắc chắn muốn xoá?\');"><i class="fa fa-trash"></i></a></td>';
                             echo '<td class="text-center"><a href="get.thidua.html?id='.$td['_id'].'&act=edit#modal-thidua" data-toggle="modal" class="suathidua"><i class="fa fa-pencil"></i></a></td>';
-                            echo '</tr>';
+                            echo '</tr>'; $i++;
                         }
                     }
                     ?>
@@ -142,10 +142,11 @@ $thidua_list = $thidua->get_all_list();
     $(document).ready(function() {
         $(".themthidua").click(function(){
             $("#act").val("register");$("#id").val("");
+            $("#id_nhansu").prop("disabled", false);
         });
         $(".suathidua").click(function(){
+            $("#id_nhansu").prop("disabled", true);
             var _link = $(this).attr("href");
-            $("#id_nhansu").select2("enable",false);
             $.getJSON(_link, function(data){
                 $("#id").val(data.id); $("#act").val(data.act);
                 $("#id_nam").val(data.id_nam);$("#id_nam").select2();

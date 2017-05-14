@@ -12,7 +12,10 @@ if($act == 'edit'){
 		'id_danhhieu' => strval($td['id_danhhieu']),
 		'id_nhansu' => $td['nhansu']['id_nhansu'] .'/'.$td['nhansu']['id_donvi']
 	);
-
 	echo json_encode($arr);
+}
+
+if($act == 'del'){
+	if($thidua->delete()) transfers_to('thidua.html?msg=Xóa thành công');
 }
 ?>

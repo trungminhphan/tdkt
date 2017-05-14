@@ -11,15 +11,19 @@ $id_donvi = isset($_POST['id_donvi']) ? $_POST['id_donvi'] : '';
 $thidua->id_nam = $id_nam; $thidua->id_danhhieu = $id_danhhieu;
 $thidua->id_donvi = $id_donvi;
 if($act == 'register'){
-	if($thidua->insert()){
-		if($url) transfers_to($url . '?msg=Cập nhật thành công.');
-		else transfers_to('thiduatapthe.htmlmsg=Cập nhật thành công!');
+	if($thidua->check_exists()){
+		transfers_to('thiduatapthe.html?msg=Không thể thêm, đã đăng ký rồi!');
+	} else {
+		if($thidua->insert()){
+			if($url) transfers_to($url . '?msg=Cập nhật thành công.');
+			else transfers_to('thiduatapthe.html?msg=Cập nhật thành công!');
+		}	
 	}
+	
 }
 
 if($act == 'edit'){
 	$thidua->id = $id;
-	
 	if($thidua->edit()){
 		if($url) transfers_to($url . '?msg=Cập nhật thành công.');
 		else transfers_to('sangkienkinhnghiem.htmlmsg=Cập nhật thành công!');

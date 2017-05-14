@@ -30,4 +30,11 @@ if($act == 'check'){
 	);
 	echo json_encode($arr);
 }
+
+if($act == 'del'){
+	$sangkienkinhnghiem->id = $id;
+	if($sangkienkinhnghiem->delete()){
+		transfers_to('sangkienkinhnghiem.html?msg=Xóa thành công');
+	}
+}
 ?>

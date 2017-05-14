@@ -9,9 +9,9 @@ class ThiDuaTapThe {
     public $id_danhhieu = '';
     public $id_donvi = '';
     public $date_post = '';
-    public $xetduyet_1 = array();
-    public $xetduyet_2 = array();
-    public $xetduyet_3 = array();
+    public $xetduyet_1 = array(); //array(t, noidung, date_post, id_user)
+    public $xetduyet_2 = array(); //array(t, noidung, date_post, id_user)
+    public $xetduyet_3 = array(); //array(t, noidung, date_post, id_user)
     
     public function __construct(){
         $this->_mongo = DBConnect::init();
@@ -54,6 +54,17 @@ class ThiDuaTapThe {
     public function delete(){
         $query = array('_id' => new MongoId($this->id));
         return $this->_collection->remove($query);
+    }
+
+    public function check_exists(){
+        $query = array(
+            'id_nam' => new MongoId($this->id_nam),
+            'id_donvi' => new MongoId($this->id_donvi)
+        );
+        $field = array('_id' => true);
+        $result = $this->_collection->findOne($query, $field);
+        if(isset($result['_id']) && $result['_id'] ) return true;
+        else return false;
     }
 }
 ?>

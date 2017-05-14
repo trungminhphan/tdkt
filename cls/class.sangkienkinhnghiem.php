@@ -71,5 +71,17 @@ class SangKienKinhNghiem {
         return $this->_collection->remove($query);
     }
 
+    public function check_skkn(){
+        $query = array(
+            'id_nam' => new MongoId($this->id_nam),
+            'nhansu' => $this->nhansu,
+            'xetduyet' => intval(1)
+        );
+        $field = array('_id' => true);
+        $result = $this->_collection->findOne($query, $field);
+        if(isset($result['_id']) && $result['_id'] ) return true;
+        else return false;
+    }
+
 }
 ?>
