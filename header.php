@@ -11,7 +11,7 @@ $users = new Users();
 require_once('inc/functions.inc.php');
 require_once('inc/config.inc.php');
 if(!$users->isLoggedIn()){ transfers_to('./login.html?url=' . $_SERVER['REQUEST_URI']); }
-//$user_default = $users->get_one_default();
+$user_default = $users->get_one_default();
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -26,6 +26,7 @@ if(!$users->isLoggedIn()){ transfers_to('./login.html?url=' . $_SERVER['REQUEST_
     <meta content="Hệ thống quản lý thi đua khen thưởng" />
 	<!-- ================== BEGIN BASE CSS STYLE ================== -->
 	<!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
 	<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -67,11 +68,9 @@ if(!$users->isLoggedIn()){ transfers_to('./login.html?url=' . $_SERVER['REQUEST_
 					<li class="dropdown navbar-user">
 						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
 							<i class="fa fa-user"></i> 
-							<span class="hidden-xs">Phan Minh Trung</span> <b class="caret"></b>
+							<span class="hidden-xs"><?php echo $user_default['person']; ?></span> <b class="caret"></b>
 						</a>
 						<ul class="dropdown-menu animated fadeInLeft">
-							<li class="arrow"></li>
-							<li><a href="change_password.html"><span class="fa fa-key"></span> Thay đổi mật khẩu</a></li>
                             <?php if($users->is_admin()) : ?>
                             <li class="arrow"></li>
                             <li><a href="users.html"><span class="fa fa-users"></span> Danh sách tài khoản</a></li>
