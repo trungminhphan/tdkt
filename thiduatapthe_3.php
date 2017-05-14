@@ -2,13 +2,13 @@
 require_once('header.php');
 check_permis($users->is_admin());
 $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
-$sangkienkinhnghiem = new SangKienKinhNghiem();$nhansu = new NhanSu();$nam = new Nam();$danhhieu = new DanhHieu();
-$thidua = new ThiDua();
+$sangkienkinhnghiem = new SangKienKinhNghiem();$nhansu = new NhanSu();$nam = new Nam();$danhhieu = new DanhHieu();$donvi = new DonVi();
+$thidua = new ThiDuaTapThe();
 $sangkienkinhnghiem_list = $sangkienkinhnghiem->get_all_list();
 $nhansu_list = $nhansu->get_all_list();
 $nam_list = $nam->get_all_list();
 $danhhieu_list = $danhhieu->get_all_list();
-$thidua_list = $thidua->get_all_list_2();
+$thidua_list = $thidua->get_all_list_3();
 ?>
 <link href="assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" />
 <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
@@ -22,7 +22,7 @@ $thidua_list = $thidua->get_all_list_2();
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title"><i class="fa fa-list"></i> Xét duyệt thi đua cá nhân vòng 2</h4>
+                <h4 class="panel-title"><i class="fa fa-list"></i> Xét duyệt thi đua tập thể vòng 3</h4>
             </div>
             <div class="panel-body">
                 <table id="data-table" class="table table-striped table-bordered table-hovered">
@@ -30,9 +30,9 @@ $thidua_list = $thidua->get_all_list_2();
                         <tr>
                             <th>STT</th>
                             <th>Năm</th>
-                            <th>Họ tên</th>
-                            <th class="text-center">Danh hiệu duyệt vòng 1</th>
+                            <th>Tập thể/Đơn vị</th>
                             <th class="text-center">Danh hiệu duyệt vòng 2</th>
+                            <th class="text-center">Danh hiệu duyệt vòng 3</th>
                             <th class="text-center">Xét duyệt</th>
                         </tr>
                     </thead>
@@ -41,21 +41,21 @@ $thidua_list = $thidua->get_all_list_2();
                     if($thidua_list){
                         $i = 1;
                         foreach($thidua_list as $td){
-                            $nhansu->id = $td['nhansu']['id_nhansu']; $ns = $nhansu->get_one();
+                            $donvi->id = $td['id_donvi']; $dv = $donvi->get_one();
                             $nam->id = $td['id_nam']; $n = $nam->get_one();
-                            $danhhieu->id = $td['xetduyet_1']['id_danhhieu']; $dh = $danhhieu->get_one();
-                            $t = isset($td['xetduyet_2']['t']) ? $td['xetduyet_2']['t'] : 0;                            
-                            if(isset($td['xetduyet_2']['id_danhhieu'])){
-                                $danhhieu->id = $td['xetduyet_2']['id_danhhieu']; $dh2 = $danhhieu->get_one();
-                                $danhhieu_2 = $dh2['ten'];
-                            } else { $danhhieu_2 = ''; }
+                            $danhhieu->id = $td['xetduyet_2']['id_danhhieu']; $dh = $danhhieu->get_one();
+                            $t = isset($td['xetduyet_3']['t']) ? $td['xetduyet_3']['t'] : 0;                            
+                            if(isset($td['xetduyet_3']['id_danhhieu'])){
+                                $danhhieu->id = $td['xetduyet_3']['id_danhhieu']; $dh3 = $danhhieu->get_one();
+                                $danhhieu_3 = $dh3['ten'];
+                            } else { $danhhieu_3 = ''; }
                             echo '<tr>';
                             echo '<td>'.$i.'</td>';
                             echo '<td>'.$n['ten'].'</td>';
-                            echo '<td>'.$ns['hoten'].'</td>';
+                            echo '<td>'.$dv['ten'].'</td>';
                             echo '<td class="text-center">'.$dh['ten'].'</td>';
-                            echo '<td class="text-center">'.$danhhieu_2.'</td>';
-                            echo '<td class="text-center"><a href="get.thidua.html?id='.$td['_id'].'&act=xetduyet_2#modal-xetduyet" data-toggle="modal" class="xetduyet">'.$arr_tinhtrang[$t].'</a></td>';
+                            echo '<td class="text-center">'.$danhhieu_3.'</td>';
+                            echo '<td class="text-center"><a href="get.thiduatapthe.html?id='.$td['_id'].'&act=xetduyet_3#modal-xetduyet" data-toggle="modal" class="xetduyet">'.$arr_tinhtrang[$t].'</a></td>';
                             echo '</tr>'; $i++;
                         }
                     }
@@ -67,19 +67,19 @@ $thidua_list = $thidua->get_all_list_2();
     </div>
 </div>
 <div class="modal fade" id="modal-xetduyet">
-    <form action="post.thidua.html" method="POST" class="form-horizontal" data-parsley-validate="true" name="congtyform">
+    <form action="post.thiduatapthe.html" method="POST" class="form-horizontal" data-parsley-validate="true" name="congtyform">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">XÉT DUYỆT ĐĂNG KÝ THI ĐUA CÁ NHÂN VÒNG 2</h4>
+                    <h4 class="modal-title">XÉT DUYỆT ĐĂNG KÝ THI ĐUA TẬP THỂ VÒNG 3</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="col-md-3 control-label">Tình trạng</label>
                         <div class="col-md-3">
                             <input type="hidden" name="id" id="id" />
-                            <input type="hidden" name="act" id="act" value="xetduyet_2" />
+                            <input type="hidden" name="act" id="act" value="xetduyet_3" />
                             <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
                             <select name="xetduyet" id="xetduyet" class="select2" style="width:100%">
                                 <?php

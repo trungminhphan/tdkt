@@ -55,6 +55,20 @@ db.getCollection("sessions").ensureIndex({
   
 ]);
 
+/** thidua indexes **/
+db.getCollection("thidua").ensureIndex({
+  "_id": NumberInt(1)
+},[
+  
+]);
+
+/** thiduatapthe indexes **/
+db.getCollection("thiduatapthe").ensureIndex({
+  "_id": NumberInt(1)
+},[
+  
+]);
+
 /** users indexes **/
 db.getCollection("users").ensureIndex({
   "_id": NumberInt(1)
@@ -256,6 +270,13 @@ db.getCollection("nhansu").insert({
   "sodienthoai": "0985954347",
   "donvi": [
     {
+      "_id": ObjectId("59170cf37247ae400e00003a"),
+      "id_donvi": ObjectId("58febdd1d89398ec0a000049"),
+      "id_chucvu": ObjectId("58febd1bd89398ec0a00003f"),
+      "ngayquyetdinh": ISODate("2017-05-13T00:00:00.0Z"),
+      "date_post": ISODate("2017-05-13T13:41:07.0Z")
+    },
+    {
       "_id": ObjectId("58ff1626d893985c0f00002a"),
       "id_donvi": ObjectId("58febe4ed89398ec0a000050"),
       "id_chucvu": ObjectId("58febd3bd89398ec0a000043"),
@@ -287,24 +308,6 @@ db.getCollection("nhansu").insert({
 });
 
 /** sangkienkinhnghiem records **/
-db.getCollection("sangkienkinhnghiem").insert({
-  "_id": ObjectId("58ff1963d893985c0f00002e"),
-  "ten": "Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm \r\n\r\nSáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm \r\n\r\nSáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm Sáng kiến kinh nghiệm ",
-  "nhansu": [
-    {
-      "id_nhansu": ObjectId("58ff1626d893985c0f00002b"),
-      "id_donvi": ObjectId("58ff1626d893985c0f00002a")
-    },
-    {
-      "id_nhansu": ObjectId("58ff1640d893985c0f00002d"),
-      "id_donvi": ObjectId("58ff1640d893985c0f00002c")
-    }
-  ],
-  "xetduyet": NumberInt(0),
-  "lydokhongxet": "",
-  "date_post": ISODate("2017-04-25T09:39:47.0Z"),
-  "id_user_regis": ObjectId("58f56ef6d89398700600002a")
-});
 
 /** sessions records **/
 db.getCollection("sessions").insert({
@@ -370,79 +373,72 @@ db.getCollection("sessions").insert({
   "timedout_at": NumberInt(1493120161),
   "expired_at": NumberInt(1493147891)
 });
+db.getCollection("sessions").insert({
+  "_id": ObjectId("59171266400ae1085de232ef"),
+  "session_id": "66sisklp2socacjtjjjvcudre6",
+  "data": "",
+  "timedout_at": NumberInt(1494690262),
+  "expired_at": NumberInt(1494720262)
+});
+db.getCollection("sessions").insert({
+  "_id": ObjectId("5917228b400ae1085de232f1"),
+  "session_id": "d0afa93rf75jcqp5sco6v81cm6",
+  "data": "user_id|s:24:\"58f56ef6d89398700600002a\";roles|i:31;",
+  "timedout_at": NumberInt(1494698220),
+  "expired_at": NumberInt(1494724395)
+});
+db.getCollection("sessions").insert({
+  "_id": ObjectId("5917efd7400ae1085de232f4"),
+  "session_id": "vs0oc7tj1b5d0f0enhq60k8205",
+  "data": "user_id|s:24:\"58f56ef6d89398700600002a\";roles|i:31;",
+  "timedout_at": NumberInt(1494752698),
+  "expired_at": NumberInt(1494776951)
+});
+db.getCollection("sessions").insert({
+  "_id": ObjectId("591811cf400ae1085de232f6"),
+  "session_id": "ua9ugudhht1nasr73s7mi4h014",
+  "data": "user_id|s:24:\"58f56ef6d89398700600002a\";roles|i:31;",
+  "timedout_at": NumberInt(1494762295),
+  "expired_at": NumberInt(1494785647)
+});
+db.getCollection("sessions").insert({
+  "_id": ObjectId("591811cf400ae1085de232f5"),
+  "session_id": "vdoa5vsk2bbm7h9824l9p552s7",
+  "data": "",
+  "timedout_at": NumberInt(1494755647),
+  "expired_at": NumberInt(1494785647)
+});
 
-/** system.indexes records **/
-db.getCollection("system.indexes").insert({
-  "v": NumberInt(1),
-  "key": {
-    "_id": NumberInt(1)
+/** thidua records **/
+
+/** thiduatapthe records **/
+db.getCollection("thiduatapthe").insert({
+  "_id": ObjectId("591824497247aedc0e000041"),
+  "id_nam": ObjectId("58fec1c5d89398ec0a000057"),
+  "id_danhhieu": ObjectId("58f58774d89398c80d00002c"),
+  "id_donvi": ObjectId("58febe4ed89398ec0a000050"),
+  "date_post": ISODate("2017-05-14T09:32:57.0Z"),
+  "xetduyet_1": {
+    "t": NumberInt(1),
+    "id_danhhieu": ObjectId("58f58766d89398c80d00002b"),
+    "noidung": "Chấp nhận",
+    "date_post": ISODate("2017-05-14T09:47:05.0Z"),
+    "id_user": ObjectId("591827997247aedc0e000042")
   },
-  "name": "_id_",
-  "ns": "thiduakhenthuong.sessions"
-});
-db.getCollection("system.indexes").insert({
-  "v": NumberInt(1),
-  "key": {
-    "_id": NumberInt(1)
+  "xetduyet_2": {
+    "t": NumberInt(2),
+    "id_danhhieu": ObjectId("58f58774d89398c80d00002c"),
+    "noidung": "Ok!",
+    "date_post": ISODate("2017-05-14T09:51:34.0Z"),
+    "id_user": ObjectId("591828a67247aee01d000033")
   },
-  "name": "_id_",
-  "ns": "thiduakhenthuong.users"
-});
-db.getCollection("system.indexes").insert({
-  "v": NumberInt(1),
-  "key": {
-    "_id": NumberInt(1)
-  },
-  "name": "_id_",
-  "ns": "thiduakhenthuong.chucvu"
-});
-db.getCollection("system.indexes").insert({
-  "v": NumberInt(1),
-  "key": {
-    "_id": NumberInt(1)
-  },
-  "name": "_id_",
-  "ns": "thiduakhenthuong.danhhieu"
-});
-db.getCollection("system.indexes").insert({
-  "v": NumberInt(1),
-  "key": {
-    "_id": NumberInt(1)
-  },
-  "name": "_id_",
-  "ns": "thiduakhenthuong.donvi"
-});
-db.getCollection("system.indexes").insert({
-  "v": NumberInt(1),
-  "key": {
-    "_id": NumberInt(1)
-  },
-  "name": "_id_",
-  "ns": "thiduakhenthuong.nhansu"
-});
-db.getCollection("system.indexes").insert({
-  "v": NumberInt(1),
-  "key": {
-    "_id": NumberInt(1)
-  },
-  "name": "_id_",
-  "ns": "thiduakhenthuong.danhhieukhenthuong"
-});
-db.getCollection("system.indexes").insert({
-  "v": NumberInt(1),
-  "key": {
-    "_id": NumberInt(1)
-  },
-  "name": "_id_",
-  "ns": "thiduakhenthuong.nam"
-});
-db.getCollection("system.indexes").insert({
-  "v": NumberInt(1),
-  "key": {
-    "_id": NumberInt(1)
-  },
-  "name": "_id_",
-  "ns": "thiduakhenthuong.sangkienkinhnghiem"
+  "xetduyet_3": {
+    "t": NumberInt(1),
+    "id_danhhieu": ObjectId("58f58766d89398c80d00002b"),
+    "noidung": "oK!",
+    "date_post": ISODate("2017-05-14T09:54:47.0Z"),
+    "id_user": ObjectId("591829677247ae140f000039")
+  }
 });
 
 /** users records **/
@@ -549,6 +545,21 @@ db.getCollection("users").insert({
     },
     {
       "in": ISODate("2017-04-25T09:18:14.0Z")
+    },
+    {
+      "in": ISODate("2017-05-13T12:47:36.0Z")
+    },
+    {
+      "out": ISODate("2017-05-13T14:04:22.0Z")
+    },
+    {
+      "in": ISODate("2017-05-13T15:13:17.0Z")
+    },
+    {
+      "in": ISODate("2017-05-14T05:49:49.0Z")
+    },
+    {
+      "in": ISODate("2017-05-14T08:14:09.0Z")
     }
   ]
 });

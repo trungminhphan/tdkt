@@ -1,4 +1,8 @@
 <?php
+header('Expires: Sun, 01 Jan 2014 00:00:00 GMT');
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Cache-Control: post-check=0, pre-check=0', FALSE);
+header('Pragma: no-cache');
 function __autoload($class_name) {
     require_once('cls/class.' . strtolower($class_name) . '.php');
 }
@@ -165,7 +169,9 @@ if(!$users->isLoggedIn()){ transfers_to('./login.html?url=' . $_SERVER['REQUEST_
                     	<li class="divider"></li>
                         <li><a href="thongkeskkn.html">Sáng kiến kinh nghiệm</a></li>
                         <li class="divider"></li>
-                        <li><a href="thongkethidua.html">Thi đua</a></li>
+                        <li><a href="thongkethidua.html">Thi đua cá nhân</a></li>
+                        <li class="divider"></li>
+                        <li><a href="thongkethiduatapthe.html">Thi đua tập thể</a></li>
                     </ul>
                 </li>
                <li>

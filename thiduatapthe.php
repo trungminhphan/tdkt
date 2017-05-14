@@ -31,7 +31,7 @@ $donvi_list = $donvi->get_all_list();
                         <tr>
                             <th>STT</th>
                             <th>Năm</th>
-                            <th>Họ tên</th>
+                            <th>Tập thể/Đơn vị</th>
                             <th class="text-center">Danh hiệu đăng ký</th>
                             <th class="text-center"><i class="fa fa-trash"></i></th>
                             <th class="text-center"><i class="fa fa-pencil"></i></th>

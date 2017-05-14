@@ -9,9 +9,9 @@ class ThiDuaTapThe {
     public $id_danhhieu = '';
     public $id_donvi = '';
     public $date_post = '';
-    public $xetduyet_1 = array(); //array(t, noidung, date_post, id_user)
-    public $xetduyet_2 = array(); //array(t, noidung, date_post, id_user)
-    public $xetduyet_3 = array(); //array(t, noidung, date_post, id_user)
+    public $xetduyet_1 = array(); //array(t, id_danhhieu, noidung, date_post, id_user)
+    public $xetduyet_2 = array(); //array(t, id_danhhieu, noidung, date_post, id_user)
+    public $xetduyet_3 = array(); //array(t, id_danhhieu, noidung, date_post, id_user)
     
     public function __construct(){
         $this->_mongo = DBConnect::init();
@@ -20,6 +20,19 @@ class ThiDuaTapThe {
 
     public function get_all_list(){
         return $this->_collection->find()->sort(array('date_post'=>-1));
+    }
+
+     public function get_all_list_1(){
+        return $this->_collection->find()->sort(array('date_post'=>-1, 'xetduyet_1.t' => 1));
+    }
+    public function get_all_list_2(){
+        $query = array('xetduyet_1' => array('$exists' => true));
+        return $this->_collection->find($query)->sort(array('date_post'=>-1, 'xetduyet_2.t' => 1));
+    }
+
+    public function get_all_list_3(){
+        $query = array('xetduyet_2' => array('$exists' => true));
+        return $this->_collection->find($query)->sort(array('date_post'=>-1, 'xetduyet_3.t' => 1));
     }
 
     public function get_list_condition($condition){
@@ -54,6 +67,24 @@ class ThiDuaTapThe {
     public function delete(){
         $query = array('_id' => new MongoId($this->id));
         return $this->_collection->remove($query);
+    }
+
+    public function xetduyet_1(){
+        $query = array('$set' => array('xetduyet_1' => $this->xetduyet_1));
+        $condition = array('_id' => new MongoId($this->id));
+        return $this->_collection->update($condition, $query);
+    }
+
+    public function xetduyet_2(){
+        $query = array('$set' => array('xetduyet_2' => $this->xetduyet_2));
+        $condition = array('_id' => new MongoId($this->id));
+        return $this->_collection->update($condition, $query);
+    }
+
+    public function xetduyet_3(){
+        $query = array('$set' => array('xetduyet_3' => $this->xetduyet_3));
+        $condition = array('_id' => new MongoId($this->id));
+        return $this->_collection->update($condition, $query);
     }
 
     public function check_exists(){

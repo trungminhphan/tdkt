@@ -33,6 +33,7 @@ $thidua_list = $thidua->get_all_list_1();
                             <th>Họ tên</th>
                             <th class="text-center">Danh hiệu đăng ký</th>
                             <th class="text-center">SKKN</th>
+                            <th class="text-center">Danh hiệu vòng 1</th>
                             <th class="text-center">Xét duyệt</th>
                         </tr>
                     </thead>
@@ -50,13 +51,18 @@ $thidua_list = $thidua->get_all_list_1();
                             if($sangkienkinhnghiem->check_skkn()){
                                 $skkn = '<i class="fa fa-check-square text-primary"></i>';
                             } else { $skkn = '<i class="fa fa-times-circle text-danger"></i>'; }
+                            if(isset($td['xetduyet_1']['id_danhhieu'])){
+                                $danhhieu->id = $td['xetduyet_1']['id_danhhieu']; $dh1 = $danhhieu->get_one();
+                                $danhhieu_1 = $dh1['ten'];
+                            } else { $danhhieu_1 = ''; }
                             echo '<tr>';
                             echo '<td>'.$i.'</td>';
                             echo '<td>'.$n['ten'].'</td>';
                             echo '<td>'.$ns['hoten'].'</td>';
                             echo '<td class="text-center">'.$dh['ten'].'</td>';
                             echo '<td class="text-center">'.$skkn.'</td>';
-                            echo '<td class="text-center"><a href="get.thidua.html?id='.$td['_id'].'&act=edit#modal-xetduyet" data-toggle="modal" class="xetduyet" name="'.$td['_id'].'">'.$arr_tinhtrang[$t].'</a></td>';
+                            echo '<td class="text-center">'.$danhhieu_1.'</td>';
+                            echo '<td class="text-center"><a href="get.thidua.html?id='.$td['_id'].'&act=xetduyet_1#modal-xetduyet" data-toggle="modal" class="xetduyet">'.$arr_tinhtrang[$t].'</a></td>';
                             echo '</tr>'; $i++;
                         }
                     }
@@ -78,7 +84,7 @@ $thidua_list = $thidua->get_all_list_1();
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="col-md-3 control-label">Tình trạng</label>
-                        <div class="col-md-9">
+                        <div class="col-md-3">
                             <input type="hidden" name="id" id="id" />
                             <input type="hidden" name="act" id="act" value="xetduyet_1" />
                             <input type="hidden" name="url" id="url" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
@@ -86,7 +92,19 @@ $thidua_list = $thidua->get_all_list_1();
                                 <?php
                                 if($arr_tinhtrang){
                                     foreach($arr_tinhtrang as $key => $value){
-                                        echo '<option value="'.$key.'">'.$value.'</option>';
+                                       if($key > 0) echo '<option value="'.$key.'">'.$value.'</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <label class="col-md-3 control-label">Danh hiệu được duyệt</label>
+                        <div class="col-md-3">
+                            <select name="id_danhhieu" id="id_danhhieu" class="select2" style="width:100%">
+                                <?php
+                                if($danhhieu_list){
+                                    foreach($danhhieu_list as $dh){
+                                        echo '<option value="'.$dh['_id'].'">'.$dh['ten'].'</option>';
                                     }
                                 }
                                 ?>
@@ -96,7 +114,7 @@ $thidua_list = $thidua->get_all_list_1();
                     <div class="form-group">
                         <label class="col-md-3 control-label">Nội dung xử lý</label>
                         <div class="col-md-9">
-                            <input type="text" name="noidung" value="" class="form-control"/>
+                            <input type="text" name="noidung" id="noidung" value="" class="form-control"/>
                         </div>
                     </div>
                 </div>
@@ -122,9 +140,13 @@ $thidua_list = $thidua->get_all_list_1();
 <script>
     $(document).ready(function() {
         $(".xetduyet").click(function(){
-            var id = $(this).attr("name");
-            $("#id").val(id); 
-            $("#id_nhansu").prop("disabled", true);
+            var _link = $(this).attr("href");
+            $.getJSON(_link, function(data){
+                $("#id").val(data.id);
+                $("#id_danhhieu").val(data.id_danhhieu); $("#id_danhhieu").select2();
+                $("#xetduyet").val(data.t); $("#xetduyet").select2();
+                $("#noidung").val(data.noidung);
+            });
         });
         <?php if(isset($msg) && $msg): ?>
         $.gritter.add({

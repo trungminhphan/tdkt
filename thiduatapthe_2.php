@@ -2,8 +2,8 @@
 require_once('header.php');
 check_permis($users->is_admin());
 $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
-$sangkienkinhnghiem = new SangKienKinhNghiem();$nhansu = new NhanSu();$nam = new Nam();$danhhieu = new DanhHieu();
-$thidua = new ThiDua();
+$sangkienkinhnghiem = new SangKienKinhNghiem();$nhansu = new NhanSu();$nam = new Nam();$danhhieu = new DanhHieu();$donvi = new DonVi();
+$thidua = new ThiDuaTapThe();
 $sangkienkinhnghiem_list = $sangkienkinhnghiem->get_all_list();
 $nhansu_list = $nhansu->get_all_list();
 $nam_list = $nam->get_all_list();
@@ -22,7 +22,7 @@ $thidua_list = $thidua->get_all_list_2();
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title"><i class="fa fa-list"></i> Xét duyệt thi đua cá nhân vòng 2</h4>
+                <h4 class="panel-title"><i class="fa fa-list"></i> Xét duyệt thi đua tập thể vòng 2</h4>
             </div>
             <div class="panel-body">
                 <table id="data-table" class="table table-striped table-bordered table-hovered">
@@ -30,7 +30,7 @@ $thidua_list = $thidua->get_all_list_2();
                         <tr>
                             <th>STT</th>
                             <th>Năm</th>
-                            <th>Họ tên</th>
+                            <th>Tập thể/Đơn vị</th>
                             <th class="text-center">Danh hiệu duyệt vòng 1</th>
                             <th class="text-center">Danh hiệu duyệt vòng 2</th>
                             <th class="text-center">Xét duyệt</th>
@@ -41,7 +41,7 @@ $thidua_list = $thidua->get_all_list_2();
                     if($thidua_list){
                         $i = 1;
                         foreach($thidua_list as $td){
-                            $nhansu->id = $td['nhansu']['id_nhansu']; $ns = $nhansu->get_one();
+                            $donvi->id = $td['id_donvi']; $dv = $donvi->get_one();
                             $nam->id = $td['id_nam']; $n = $nam->get_one();
                             $danhhieu->id = $td['xetduyet_1']['id_danhhieu']; $dh = $danhhieu->get_one();
                             $t = isset($td['xetduyet_2']['t']) ? $td['xetduyet_2']['t'] : 0;                            
@@ -52,10 +52,10 @@ $thidua_list = $thidua->get_all_list_2();
                             echo '<tr>';
                             echo '<td>'.$i.'</td>';
                             echo '<td>'.$n['ten'].'</td>';
-                            echo '<td>'.$ns['hoten'].'</td>';
+                            echo '<td>'.$dv['ten'].'</td>';
                             echo '<td class="text-center">'.$dh['ten'].'</td>';
                             echo '<td class="text-center">'.$danhhieu_2.'</td>';
-                            echo '<td class="text-center"><a href="get.thidua.html?id='.$td['_id'].'&act=xetduyet_2#modal-xetduyet" data-toggle="modal" class="xetduyet">'.$arr_tinhtrang[$t].'</a></td>';
+                            echo '<td class="text-center"><a href="get.thiduatapthe.html?id='.$td['_id'].'&act=xetduyet_2#modal-xetduyet" data-toggle="modal" class="xetduyet">'.$arr_tinhtrang[$t].'</a></td>';
                             echo '</tr>'; $i++;
                         }
                     }
@@ -67,12 +67,12 @@ $thidua_list = $thidua->get_all_list_2();
     </div>
 </div>
 <div class="modal fade" id="modal-xetduyet">
-    <form action="post.thidua.html" method="POST" class="form-horizontal" data-parsley-validate="true" name="congtyform">
+    <form action="post.thiduatapthe.html" method="POST" class="form-horizontal" data-parsley-validate="true" name="congtyform">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">XÉT DUYỆT ĐĂNG KÝ THI ĐUA CÁ NHÂN VÒNG 2</h4>
+                    <h4 class="modal-title">XÉT DUYỆT ĐĂNG KÝ THI ĐUA TẬP THỂ VÒNG 2</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">

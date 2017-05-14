@@ -26,11 +26,13 @@ class ThiDua {
         return $this->_collection->find()->sort(array('date_post'=>-1, 'xetduyet_1.t' => 1));
     }
     public function get_all_list_2(){
-        return $this->_collection->find()->sort(array('date_post'=>-1, 'xetduyet_2.t' => 1));
+        $query = array('xetduyet_1' => array('$exists' => true));
+        return $this->_collection->find($query)->sort(array('date_post'=>-1, 'xetduyet_2.t' => 1));
     }
 
     public function get_all_list_3(){
-        return $this->_collection->find()->sort(array('date_post'=>-1, 'xetduyet_3.t' => 1));
+        $query = array('xetduyet_2' => array('$exists' => true));
+        return $this->_collection->find($query)->sort(array('date_post'=>-1, 'xetduyet_3.t' => 1));
     }
 
     public function get_list_condition($condition){
@@ -73,8 +75,8 @@ class ThiDua {
     public function edit(){
         $query = array('$set' => array(
             'id_nam' => new MongoId($this->id_nam),
-            'id_danhhieu' => new MongoId($this->id_danhhieu),
-            'nhansu' => $this->nhansu
+            'id_danhhieu' => new MongoId($this->id_danhhieu)
+            //'nhansu' => $this->nhansu
         ));
         $condition = array('_id' => new MongoId($this->id));
         return $this->_collection->update($condition, $query);   

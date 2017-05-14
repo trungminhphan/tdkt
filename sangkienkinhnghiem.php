@@ -85,7 +85,7 @@ $nam_list = $nam->get_all_list();
                                 <?php
                                 if($arr_tinhtrang){
                                     foreach($arr_tinhtrang as $key => $value){
-                                        echo '<option value="'.$key.'">'.$value.'</option>';
+                                        if($key > 0) echo '<option value="'.$key.'">'.$value.'</option>';
                                     }
                                 }
                                 ?>
